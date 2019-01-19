@@ -1,0 +1,40 @@
+{
+	"name": "cmstead-coverista",
+	"displayName": "Coverista",
+	"description": "Code coverage visualizer for your application",
+	"version": "0.0.1",
+	"engines": {
+		"vscode": "^1.28.0"
+	},
+	"publisher": "",
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:cmstead-coverista.helloWorld"
+	],
+	"main": "./extension.js",
+	"contributes": {
+		"commands": [
+			{
+				"command": "cmstead-coverista.helloWorld",
+				"title": "Coverista: Hello World"
+			}
+		]
+	},
+	"scripts": {
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"chai": "^4.2.0",
+		"eslint": "^4.11.0",
+		"mocha": "^5.2.0",
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25"
+	},
+	"dependencies": {
+		"dject": "^1.10.0",
+		"lcov-parse": "^1.0.0"
+	}
+}
