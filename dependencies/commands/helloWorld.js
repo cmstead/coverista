@@ -1,7 +1,9 @@
-function helloWorld(notifier) {
+function helloWorld(vscode, notifier) {
     'use strict';
 
     function helloWorldCommand() {
+        console.log(vscode.window.activeTextEditor);
+        console.log(vscode.workspace);
         notifier.info('Hello World!');
     }
 
