@@ -5,12 +5,12 @@ const appContainer = require('../../container');
 
 const { assert } = testContainer.build('chai');
 
-describe('pathHelper', function () {
+describe('activeEditorHelper', function () {
 
     let pathFake;
     let vscodeFake;
 
-    let pathHelper;
+    let activeEditorHelper;
 
     beforeEach(function () {
         const appChildContainer = appContainer.new();
@@ -21,7 +21,7 @@ describe('pathHelper', function () {
         appChildContainer.register(() => pathFake, 'path');
         appChildContainer.register(() => vscodeFake, 'vscode');
 
-        pathHelper = appChildContainer.build('pathHelper');
+        activeEditorHelper = appChildContainer.build('activeEditorHelper');
     });
 
     describe('getActiveTextEditorFolderPath', function () {
@@ -32,9 +32,17 @@ describe('pathHelper', function () {
 
             vscodeFake.window.activeTextEditor._documentData._uri.fsPath = editorFilePath;
 
-            const folderPath = pathHelper.getActiveTextEditorFolderPath();
+            const folderPath = activeEditorHelper.getActiveTextEditorFolderPath();
             
             assert.equal(folderPath, expectedFolderPath);
+        });
+
+        it('returns null if active text editor does not exist', function () {
+            vscodeFake.window.activeTextEditor = undefined;
+
+            const folderPath = activeEditorHelper.getActiveTextEditorFolderPath();
+            
+            assert.equal(folderPath, null);
         });
     });
 

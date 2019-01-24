@@ -1,34 +1,33 @@
 function pathHelper(
-    path,
-    vscode
+    functionUtils,
+    path
 ) {
     'use strict';
 
-    function getFilePath() {
-        const activeEditor = vscode.window.activeTextEditor;
-
-        return activeEditor._documentData._uri.fsPath;
-    }
-
-    function getFilePathTokens(filePath) {
+    function tokenizePath(filePath) {
         return filePath.split(path.sep);
     }
 
-    function getFolderPathTokens(filePath) {
-        const filePathTokens = getFilePathTokens(filePath);
-
+    function stripLastToken(filePathTokens) {
         return filePathTokens.slice(0, filePathTokens.length - 1);
     }
 
-    function getActiveTextEditorFolderPath() {
-        const filePath = getFilePath();
-        const folderPathTokens = getFolderPathTokens(filePath);
-
-        return folderPathTokens.join(path.sep);
+    function unixSafePathJoin(pathTokens) {
+        return Array.prototype.join.call(pathTokens, path.sep);
     }
 
+    const stripLastPathElement = (filePath) =>
+        functionUtils.foldCompose(
+            tokenizePath,
+            stripLastToken,
+            unixSafePathJoin
+        )(filePath);
+
     return {
-        getActiveTextEditorFolderPath: getActiveTextEditorFolderPath
+        stripLastPathElement: stripLastPathElement,
+        stripLastToken: stripLastToken,
+        tokenizePath: tokenizePath,
+        unixSafePathJoin: unixSafePathJoin
     };
 }
 
