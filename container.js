@@ -5,10 +5,7 @@ const path = require('path');
 var config = {
     cwd: path.join(__dirname, 'dependencies'),
     modulePaths: [
-        '',
-        'commands',
-        'utilities',
-        'wrappedModules'
+        '**/*.js'
     ],
     allowOverride: false,
     eagerLoad: false,

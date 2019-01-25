@@ -15,11 +15,12 @@ function activeEditorHelper(
         return vscode.window.activeTextEditor;
     }
 
-    const getFilePathOrNull = () =>
-        functionUtils.compose(
+    function getFilePathOrNull() {
+        return functionUtils.compose(
             getActiveTextEditor,
             getPathIfEditorExists
         )();
+    }
 
     function getFilePathAction(filePath) {
         return Boolean(filePath)
@@ -27,12 +28,25 @@ function activeEditorHelper(
             : () => null;
     }
 
-    function getActiveTextEditorFolderPath() {
-        const filePath = getFilePathOrNull();
-        const filePathAction = getFilePathAction(filePath)
-
-        return filePathAction(filePath);
+    function applyFilePathTransformation(filePath) {
+        return filePathTransformation =>
+            filePathTransformation(filePath);
     }
+
+    function getFolderPath(filePath) {
+        return functionUtils.compose(
+            getFilePathAction,
+            applyFilePathTransformation(filePath)
+        )(filePath);
+    }
+
+    function getActiveTextEditorFolderPath() {
+        return functionUtils.compose(
+            getFilePathOrNull,
+            getFolderPath
+        )();
+    }
+
 
     return {
         getActiveTextEditorFolderPath: getActiveTextEditorFolderPath,
