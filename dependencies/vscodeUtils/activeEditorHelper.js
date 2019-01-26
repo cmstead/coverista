@@ -50,7 +50,7 @@ function activeEditorHelper(
 
     return {
         getActiveTextEditorFolderPath: getActiveTextEditorFolderPath,
-        getFilePath: getFilePathOrNull
+        getFilePathOrNull: getFilePathOrNull
     };
 }
 

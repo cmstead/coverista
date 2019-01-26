@@ -5,8 +5,7 @@ const path = require('path');
 var config = {
     cwd: path.join(__dirname, 'testUtilities'),
     modulePaths: [
-        '',
-        'testDoubleFactories'
+        '**/*.js'
     ],
     allowOverride: false,
     eagerLoad: false,

@@ -4,24 +4,27 @@ function pathHelper(
 ) {
     'use strict';
 
-    function tokenizePath(filePath) {
-        return filePath.split(path.sep);
-    }
+    const separatorPattern = /[\/\\]/;
 
+    function tokenizePath(filePath) {
+        return filePath.split(separatorPattern);
+    }
+    
     function stripLastToken(filePathTokens) {
         return filePathTokens.slice(0, filePathTokens.length - 1);
     }
 
     function unixSafePathJoin(pathTokens) {
-        return Array.prototype.join.call(pathTokens, path.sep);
+        return pathTokens.join(path.sep);
     }
 
-    const stripLastPathElement = (filePath) =>
-        functionUtils.foldCompose(
+    const stripLastPathElement = (filePath) =>{
+        return functionUtils.foldCompose(
             tokenizePath,
             stripLastToken,
             unixSafePathJoin
         )(filePath);
+    }
 
     return {
         stripLastPathElement: stripLastPathElement,
