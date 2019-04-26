@@ -11,25 +11,26 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:cmstead-coverista.helloWorld"
+		"onCommand:cmstead-coverista.showCoverage"
 	],
 	"main": "./extension.js",
 	"contributes": {
 		"commands": [
 			{
-				"command": "cmstead-coverista.helloWorld",
-				"title": "Coverista: Hello World"
+				"command": "cmstead-coverista.showCoverage",
+				"title": "Coverista: Show Coverage"
 			}
 		]
 	},
 	"scripts": {
 		"postinstall": "node ./node_modules/vscode/bin/install",
-		"test": "node ./node_modules/mocha/bin/mocha ./test/**/*.test.js"
+		"test": "node ./node_modules/nyc/bin/nyc --reporter=lcov --reporter=text-summary ./node_modules/mocha/bin/mocha ./test/**/*.test.js"
 	},
 	"devDependencies": {
 		"chai": "^4.2.0",
 		"eslint": "^4.11.0",
 		"mocha": "^5.2.0",
+		"nyc": "^14.0.0",
 		"sinon": "^7.2.3",
 		"typescript": "^3.1.4",
 		"vscode": "^1.1.25"

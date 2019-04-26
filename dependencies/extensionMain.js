@@ -9,7 +9,8 @@ function extensionMain(
     function activate(context) {
         const register = commandRegistrar.build(context, namespace);
 
-        register(__container.build('helloWorld'));
+        register(__container.build('showCoverage'));
+        // register(__container.build('hide'));
     }
 
     function deactivate() { }

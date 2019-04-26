@@ -13,7 +13,7 @@ function filesystemHelper(
     }
 
     function readTextFile(filePath) {
-        return fs.readFileSync(filePath, { encoding: 'utf8' ``});
+        return fs.readFileSync(filePath, { encoding: 'utf8' });
     }
 
     return {

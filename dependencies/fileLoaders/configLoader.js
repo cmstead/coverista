@@ -7,13 +7,15 @@ function configLoader(
     'use strict';
 
     function buildFilePath(folderPath) {
-        return `${folderPath}/.coveristaconfig`;
+        return `${folderPath}/coveristaconfig.json`;
     }
 
     const fileFinder = fileFinderFactory(buildFilePath);
 
     function getConfigPath() {
         const folderPath = activeEditorHelper.getActiveTextEditorFolderPath();
+
+        console.log(folderPath);
 
         return fileFinder.findNearestMatchingFile(folderPath);
     }

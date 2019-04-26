@@ -28,7 +28,7 @@ describe('configLoader', function () {
 
     describe('getConfigPath', function () {
 
-        it('returns the path .coveristaconfig file in same directory', function () {
+        it('returns the path coveristaconfig.json file in same directory', function () {
             const projectPath = '/root/usr/auser/projects/my_project';
 
             activeEditorHelperFake.getActiveTextEditorFolderPath.callsFake(function () {
@@ -39,7 +39,7 @@ describe('configLoader', function () {
                 return true;
             });
 
-            const expectedPath = projectPath + '/.coveristaconfig';
+            const expectedPath = projectPath + '/coveristaconfig.json';
 
             const returnedPath = configLoader.getConfigPath();
 
@@ -47,9 +47,9 @@ describe('configLoader', function () {
 
         });
 
-        it('returns the path .coveristaconfig file from a parent directory', function () {
+        it('returns the path coveristaconfig.json file from a parent directory', function () {
             const projectPath = '/root/usr/anotheruser/projects/my_project';
-            const coveristaConfigFileName = '/.coveristaconfig';
+            const coveristaConfigFileName = '/coveristaconfig.json';
 
             activeEditorHelperFake.getActiveTextEditorFolderPath.callsFake(function () {
                 return `${projectPath}/anotherFolder/andAnother`;
@@ -68,7 +68,7 @@ describe('configLoader', function () {
 
         });
 
-        it('returns null if .coveristaconfig cannot be found', function () {
+        it('returns null if coveristaconfig.json cannot be found', function () {
             const projectPath = '/root/usr/anotheruser/projects/my_project';
 
             activeEditorHelperFake.getActiveTextEditorFolderPath.callsFake(function () {
@@ -97,7 +97,7 @@ describe('configLoader', function () {
             };
 
             const fileContent = JSON.stringify(configContent);
-            const filePath = '/test/my_project/.coveristaconfig';
+            const filePath = '/test/my_project/coveristaconfig.json';
 
             filesystemHelperFake.readTextFile.callsFake(() => fileContent);
 
